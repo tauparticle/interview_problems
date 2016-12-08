@@ -50,4 +50,25 @@ public:
         }
         return result;
     }
+    
+    // another one that's easier
+    vector<int> preorderTraversal(TreeNode* root) {
+        
+        vector<int> res;
+        if (!root) return res;
+        stack<TreeNode*> s;
+        s.push(root);
+        
+        while(!s.empty())
+        {
+            auto n = s.top();
+            s.pop();
+            res.push_back(n->val);
+            
+            if (n->right) s.push(n->right);
+            if (n->left) s.push(n->left);
+        }
+        return res;
+        
+    }
 };
