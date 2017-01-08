@@ -1,7 +1,6 @@
-/*
- 364. Nested List Weight Sum II   Add to List QuestionEditorial Solution  My Submissions
- Total Accepted: 8778
- Total Submissions: 17349
+/*364. Nested List Weight Sum II   Add to List QuestionEditorial Solution  My Submissions
+ Total Accepted: 8893
+ Total Submissions: 17631
  Difficulty: Medium
  Contributors: Admin
  Given a nested list of integers, return the sum of all integers in the list weighted by their depth.
@@ -16,9 +15,9 @@
  Example 2:
  Given the list [1,[4,[6]]], return 17. (one 1 at depth 3, one 4 at depth 2, and one 6 at depth 1; 1*3 + 4*2 + 6*1 = 17)
  
- Hide Company Tags LinkedIn
- Hide Tags Depth-first Search
- Hide Similar Problems (E) Nested List Weight Sum
+ Show Company Tags
+ Show Tags
+ Show Similar Problems
 
  */
 
@@ -55,22 +54,24 @@ class Solution {
 public:
     int depthSumInverse(vector<NestedInteger>& nestedList) {
         vector<int> results;
-        dfs(nestedList, 0, results);
+        dfsHelper(nestedList, 0, results);
         
-        int sum = 0;
+        int weightedSum = 0;
         int level = 1;
-        for (int i=results.size()-1; i >= 0; i++)
+        for (int i = results.size()-1; i >= 0; i--)
         {
-            level++;
+            weightedSum += results[i] * level++;
         }
-        return sum;
+        
+        return weightedSum;
     }
     
-    void dfs(vector<NestedInteger>& nestedList, int depth, vector<int>& results)
+    
+    void dfsHelper(vector<NestedInteger>& nestedList, int depth, vector<int>& results)
     {
         if (results.size() == depth)
         {
-            results.resize(depth+1);
+            results.push_back(0);
         }
         
         for (auto& ni : nestedList)
@@ -81,7 +82,7 @@ public:
             }
             else
             {
-                dfs(ni.getList(), depth + 1, results);
+                dfsHelper(ni.getList(), depth + 1, results);
             }
         }
     }
