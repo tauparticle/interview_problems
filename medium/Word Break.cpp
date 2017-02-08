@@ -21,7 +21,34 @@
 
 class Solution {
 public:
+    
+    // 2 ways of solving this.  One with a DP memo array.  O(n^2) time.
     bool wordBreak(string s, vector<string>& wordDict) {
+        if (wordDict.size() == 0) return false;
+        unordered_set<string> dict(wordDict.begin(), wordDict.end());
+        vector<bool> dp(s.length()+1, false);
+        dp[0] = true;
+        for (int i=1; i<=s.length(); ++i)
+        {
+            for (int j=0; j<i; j++)
+            {
+                if (!dp[j])
+                {
+                    continue;
+                }
+                string sub = s.substr(j, i-j);
+                if (dict.find(sub) != dict.end())
+                {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+    
+    // second way is recursively partitioning the array until all sub-parts are in the dict.
+    bool wordBreak_recursiveDP(string s, vector<string>& wordDict) {
         
         unordered_set<string> dict(wordDict.begin(), wordDict.end());
         unordered_map<string, bool> memo;
