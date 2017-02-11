@@ -1,0 +1,8 @@
+1)  Write a function that takes 2 arguments: a binary tree and an integer n, it should return the n-th element in the inorder traversal of the binary tree.
+
+2) Given 2 very large numbers, each of which is so large it can only be represented as an array of integers, write a function to multiply them.
+
+3) Write a function to compute the square root of a number without using any built-in functions.
+
+4) What part of Facebook's infrastructure interests you? What would you like to work on?
+
